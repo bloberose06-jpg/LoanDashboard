@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_loans
+    description: "Datos de préstamos limpios, con nombres de columna estandarizados desde raw_loans."
+    columns:
+      - name: credit_policy
+        description: "1 si el cliente cumple los criterios de crédito de LendingClub, 0 si no."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+
+      - name: purpose
+        description: "Propósito declarado del préstamo (ej. debt_consolidation, credit_card)."
+        tests:
+          - not_null
+
+      - name: int_rate
+        description: "Tasa de interés del préstamo."
+        tests:
+          - not_null
+
+      - name: not_fully_paid
+        description: "1 si el préstamo no fue pagado en su totalidad."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
